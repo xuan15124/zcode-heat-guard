@@ -110,9 +110,26 @@ def macmon_fallback():
                         "gpu_power_w": watt("gpu_power"),
                         "all_power_w": watt("all_power"),
                         "fan_rpm": [f.get("rpm") for f in data.get("fans") or []],
+                        # 系统已降频 = 一票判热, 兜底模式也要有
+                        "throttle_pct": pmset_throttle(),
                         "temp_src": "macmon-fallback",
                     }
     except (OSError, subprocess.SubprocessError, ValueError):
+        pass
+    return None
+
+
+def pmset_throttle():
+    """pmset -g therm 的 CPU_Speed_Limit, 没有节流记录返回 None。"""
+    try:
+        out = subprocess.run(
+            ["/usr/bin/pmset", "-g", "therm"],
+            capture_output=True, text=True, timeout=5,
+        ).stdout
+        m = re.search(r"CPU_Speed_Limit\s*=\s*(\d+)", out)
+        if m:
+            return int(m.group(1))
+    except (OSError, subprocess.SubprocessError):
         pass
     return None
 
