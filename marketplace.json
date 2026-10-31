@@ -1,0 +1,17 @@
+{
+  "name": "heat-guard-market",
+  "displayName": "发热守卫 HeatGuard",
+  "plugins": [
+    {
+      "name": "heat-guard",
+      "source": "./heat-guard",
+      "version": "0.1.1",
+      "description": "本机发热时自动暂缓重活：PreToolUse 钩子检查温度/节流，过热拒绝 Bash 并提示延后；附带温度查询技能。只读数据不装服务，宿主采样由独立的 heat-sampler 服务提供",
+      "displayName": "发热守卫 heat-guard",
+      "displayName_i18n": { "zh-CN": "发热守卫" },
+      "description_i18n": { "zh-CN": "机器发热时自动拦下重活（编译/测试/长任务）让你暂缓；可随时问当前温度。独立于采样服务：本机装了 heat-sampler 就用它的精准数据，没装就用 macmon 兜底" },
+      "category": "utilities",
+      "author": { "name": "xuan" }
+    }
+  ]
+}

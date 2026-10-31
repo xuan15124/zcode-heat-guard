@@ -1,0 +1,8 @@
+{
+  "name": "heat-guard",
+  "version": "0.1.1",
+  "description": "本机发热时自动暂缓重活：PreToolUse 钩子在执行 Bash 前检查温度/节流状态，过热直接拒绝并提示延后；附带按需温度查询技能。本插件只读数据不装服务；宿主机温度采样由独立的 heat-sampler 服务提供",
+  "author": { "name": "xuan" },
+  "hooks": "./hooks/hooks.json",
+  "skills": "./skills"
+}
